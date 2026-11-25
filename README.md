@@ -1,8 +1,8 @@
-# MedAcervo: site e aplicativo de medicina
+# Medicina Útil: site e aplicativo de medicina (medicinautil.com)
 
 Site de resumos, artigos (blog) e PDFs de medicina, que também funciona como **aplicativo instalável no celular** (PWA) e já vem preparado para **anúncios do Google AdSense**.
 
-**Custo: R$ 0.** A hospedagem é o GitHub Pages (gratuito), a publicação é automática e o painel de publicação é gratuito.
+**Custos:** hospedagem, publicação, painel e aplicativo são **gratuitos** (GitHub Pages). O único gasto é o registro anual do domínio **medicinautil.com**, que se paga com os anúncios. Um domínio próprio também é o que mais facilita a aprovação no AdSense.
 
 ---
 
@@ -16,7 +16,8 @@ Site de resumos, artigos (blog) e PDFs de medicina, que também funciona como **
 | 📱 Aplicativo (PWA) | Instala no Android, iPhone e computador, sem loja |
 | 📴 Modo offline | Páginas visitadas, conteúdos "Salvos" e PDFs marcados abrem sem internet |
 | 🔖 Salvos | O leitor guarda os conteúdos favoritos no próprio aparelho |
-| 🌙 Tema escuro | Automático ou pelo botão da lua |
+| 🎨 Visual | Tons de laranja, dourado e amarelo com detalhes em verde |
+| 🌗 Tema claro e escuro | Segue o celular automaticamente; o botão ☀️/🌙 troca e memoriza a escolha |
 | 💰 Anúncios | Google AdSense em 4 posições (topo, meio, lateral, rodapé) + `ads.txt` |
 | 🔎 SEO | Sitemap, RSS, Open Graph (prévia no WhatsApp), dados estruturados |
 | ⚖️ Páginas exigidas pelo AdSense | Sobre, Contato, Política de Privacidade (LGPD), Termos de Uso, aviso de cookies |
@@ -25,37 +26,39 @@ Site de resumos, artigos (blog) e PDFs de medicina, que também funciona como **
 
 ---
 
-## Passo 1: Criar a conta e o repositório no GitHub (5 min)
+## Passo 1: Registrar o domínio medicinautil.com
 
-1. Crie uma conta gratuita em **github.com**. O nome de usuário fará parte do endereço do site.
-2. Clique em **New repository** e use exatamente o nome `SEU-USUARIO.github.io` (troque pelo seu usuário).
-   - Exemplo: usuário `medjoao` → repositório `medjoao.github.io` → site em `https://medjoao.github.io`
-   - **Por que esse nome?** O site fica na raiz do domínio, condição necessária para o arquivo `ads.txt` do AdSense funcionar.
-3. Marque **Public** e clique em **Create repository**.
+1. Verifique se o domínio está livre e registre-o em um registrador de `.com`. Opções conhecidas: **Cloudflare Registrar** (cobra preço de custo e não aumenta na renovação), Namecheap, Porkbun ou GoDaddy. O Registro.br só vende domínios `.br`; se preferir `medicinautil.com.br`, ele é registrado lá.
+2. Ative a renovação automática para não perder o domínio.
 
-## Passo 2: Ajustar seus dados (2 min)
+## Passo 2: Criar a conta e o repositório no GitHub (5 min)
 
-Abra `src/_data/site.json` e troque:
+1. Crie uma conta gratuita em **github.com**.
+2. Clique em **New repository**, use o nome `medicinautil`, marque **Public** e clique em **Create repository**.
+
+## Passo 3: Ajustar seus dados (2 min)
+
+Abra `src/_data/site.json` e troque o usuário do GitHub:
 
 ```json
-"url": "https://SEU-USUARIO.github.io",
-"github_repo": "SEU-USUARIO/SEU-USUARIO.github.io",
-"email_contato": "seu-email@exemplo.com",
+"github_repo": "SEU-USUARIO/medicinautil",
 ```
 
-Se quiser, troque também `"nome"` e `"slogan"`.
+Nome (**Medicina Útil**), endereço (`https://medicinautil.com`) e cores já estão configurados. O arquivo `src/CNAME` com o domínio também já existe.
 
-## Passo 3: Enviar os arquivos (5 min)
+O e-mail de contato está como `contato@medicinautil.com`. Para recebê-lo de graça no seu Gmail, use o **Cloudflare Email Routing** (gratuito, para domínios no Cloudflare) ou o ImprovMX. Se preferir, troque pelo seu e-mail pessoal.
+
+## Passo 4: Enviar os arquivos (5 min)
 
 A forma mais simples é o **GitHub Desktop** (gratuito: desktop.github.com):
 
-1. Instale, entre com sua conta e escolha **File → Add local repository**, selecionando a pasta `medacervo`. A pasta já é um repositório git com o primeiro commit feito.
-2. Clique em **Publish repository**. Se já criou o repositório no passo 1, use **Repository → Repository settings → Remote** e cole `https://github.com/SEU-USUARIO/SEU-USUARIO.github.io.git`. Depois clique em **Push origin**.
+1. Instale, entre com sua conta e escolha **File → Add local repository**, selecionando a pasta do projeto. A pasta já é um repositório git com commit feito.
+2. Em **Repository → Repository settings → Remote**, cole `https://github.com/SEU-USUARIO/medicinautil.git` e clique em **Push origin**.
 
 Pelo terminal, a alternativa é:
 
 ```bash
-git remote add origin https://github.com/SEU-USUARIO/SEU-USUARIO.github.io.git
+git remote add origin https://github.com/SEU-USUARIO/medicinautil.git
 ```
 
 ```bash
@@ -64,19 +67,31 @@ git push -u origin main
 
 > ⚠️ Não use o upload por arrastar no site do GitHub: ele pode ignorar a pasta oculta `.github`, que faz a publicação automática.
 
-## Passo 4: Ligar o GitHub Pages (1 min)
+## Passo 5: Ligar o GitHub Pages e conectar o domínio (10 min)
 
-No repositório: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+1. No repositório: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+2. Ainda em **Settings → Pages → Custom domain**, digite `medicinautil.com` e salve.
+3. No painel do registrador (seção **DNS**), crie estes registros:
 
-Pronto. Em 1 a 3 minutos o site estará no ar em `https://SEU-USUARIO.github.io`, e o progresso aparece na aba **Actions**. A partir daí, cada alteração publica sozinha.
+| Tipo | Nome | Valor |
+|---|---|---|
+| A | `@` | `185.199.108.153` |
+| A | `@` | `185.199.109.153` |
+| A | `@` | `185.199.110.153` |
+| A | `@` | `185.199.111.153` |
+| CNAME | `www` | `SEU-USUARIO.github.io` |
 
-## Passo 5: Configurar o painel de publicação `/admin` (3 min)
+   > No Cloudflare, deixe esses registros como **"DNS only"** (nuvem cinza) até o GitHub emitir o certificado.
+4. Aguarde a propagação, que pode levar de minutos a algumas horas. Depois, marque **Enforce HTTPS** em *Settings → Pages*.
+5. Pronto: o site estará em **https://medicinautil.com**. Enquanto o domínio não propaga, ele já funciona em `https://SEU-USUARIO.github.io/medicinautil/`, porque o site se ajusta sozinho ao endereço.
+
+## Passo 6: Configurar o painel de publicação `/admin` (3 min)
 
 1. No GitHub: foto do perfil → **Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token**.
 2. Em **Repository access**, escolha **Only select repositories** e marque o repositório do site.
 3. Em **Permissions → Repository permissions → Contents**, escolha **Read and write**.
 4. Gere o token e copie. Guarde-o como uma senha e não compartilhe.
-5. Acesse `https://SEU-USUARIO.github.io/admin/`, escolha **Sign in with Token** e cole o token.
+5. Acesse `https://medicinautil.com/admin/`, escolha **Sign in with Token** e cole o token.
 
 Para publicar no painel:
 - **Conteúdos → New**: preencha título, descrição, tipo (Resumo, Artigo ou PDF) e disciplina.
@@ -85,14 +100,14 @@ Para publicar no painel:
 - **Configurações do site**: altere nome, e-mail, IDs do AdSense e a lista de disciplinas sem mexer em código.
 - Para guardar sem publicar, marque **Rascunho**.
 
-> O token expira na data escolhida. Quando expirar, gere outro (passos 1 a 4).
+> O token expira na data escolhida. Quando expirar, gere outro (itens 1 a 4 deste passo).
 
 ---
 
-## Passo 6: Ativar os anúncios (Google AdSense)
+## Passo 7: Ativar os anúncios (Google AdSense)
 
 1. Com o site no ar e **alguns conteúdos originais publicados**, crie a conta em **adsense.google.com**. É preciso ter 18 anos ou mais e informar dados bancários e fiscais para receber.
-2. Adicione o site `SEU-USUARIO.github.io`.
+2. Adicione o site `medicinautil.com`.
 3. O AdSense mostra seu ID de editor (`ca-pub-1234567890123456`). Cole-o no painel `/admin` → **Configurações do site → Google AdSense → ID do editor**, ou diretamente em `src/_data/site.json` no campo `adsense.client`.
    - Isso já insere o código de verificação em todas as páginas **e** gera o `ads.txt` automaticamente.
 4. Clique em **Verificar** no AdSense e aguarde a análise, que pode levar de dias a algumas semanas.
@@ -105,7 +120,7 @@ O pagamento é feito quando o saldo atinge o valor mínimo definido pelo AdSense
 
 ### ⚠️ Pontos importantes para ser aprovado e não perder a conta
 
-- **Domínio:** o AdSense exige que você comprove a posse do site. Endereços gratuitos `*.github.io` **podem ser recusados**. Se isso acontecer, a solução é um domínio próprio `.com.br` no Registro.br (cerca de R$ 40/ano, o único custo possível). Para conectá-lo, crie o arquivo `src/CNAME` contendo apenas o domínio (ex.: `medacervo.com.br`), configure o DNS conforme a página *Settings → Pages* e troque o `url` no `site.json`.
+- **Domínio:** com `medicinautil.com` você comprova a posse do site e o `ads.txt` fica na raiz do domínio (`https://medicinautil.com/ads.txt`), como o AdSense exige.
 - **Direitos autorais:** **não publique PDFs de livros, apostilas de cursinho ou slides de professores sem autorização.** Isso viola a Lei 9.610/98, gera denúncias que derrubam o repositório e é motivo de banimento definitivo do AdSense. Publique materiais **seus** (resumos, mapas mentais, roteiros) citando as fontes.
 - **Conteúdo médico:** o Google é mais rigoroso com temas de saúde (YMYL). Conteúdo original, com referências (como nos exemplos), aumenta a chance de aprovação.
 - **Nunca clique nos próprios anúncios** nem peça para outras pessoas clicarem: é a principal causa de banimento.

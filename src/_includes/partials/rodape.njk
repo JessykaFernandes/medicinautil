@@ -2,7 +2,7 @@
   {% set slotKey = "slot_rodape" %}{% include "partials/anuncio.njk" %}
   <div class="container rodape-grid">
     <div>
-      <a class="logo" href="/"><img src="/assets/icons/favicon.svg" alt="" width="28" height="28"><span>{{ site.nome }}</span></a>
+      <a class="logo" href="/"><img src="/assets/icons/favicon.svg" alt="" width="28" height="28">{% set _n = site.nome.split(" ") %}<span>{{ _n | first }}{% if _n.length > 1 %} <span class="logo-destaque">{{ _n.slice(1).join(" ") }}</span>{% endif %}</span></a>
       <p class="rodape-texto">{{ site.slogan }}.</p>
       <p class="rodape-aviso">Conteúdo educacional. Não substitui avaliação, diagnóstico ou tratamento por profissional habilitado.</p>
     </div>

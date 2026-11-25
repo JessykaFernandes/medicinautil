@@ -2,7 +2,7 @@
   <div class="container cabecalho-inner">
     <a class="logo" href="/" aria-label="{{ site.nome }} — página inicial">
       <img src="/assets/icons/favicon.svg" alt="" width="32" height="32">
-      <span>{{ site.nome }}</span>
+      {% set _n = site.nome.split(" ") %}<span>{{ _n | first }}{% if _n.length > 1 %} <span class="logo-destaque">{{ _n.slice(1).join(" ") }}</span>{% endif %}</span>
     </a>
     <nav class="nav-topo" aria-label="Navegação principal">
       <a href="/resumos/" {% if page.url == "/resumos/" %}aria-current="page"{% endif %}>Resumos</a>
@@ -15,11 +15,12 @@
         <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M10 2a8 8 0 0 1 6.32 12.9l5.39 5.4-1.41 1.4-5.4-5.38A8 8 0 1 1 10 2Zm0 2a6 6 0 1 0 0 12 6 6 0 0 0 0-12Z"/></svg>
       </a>
       <button class="icone-btn" type="button" id="alternar-tema" aria-label="Alternar tema claro/escuro" title="Tema claro/escuro">
-        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.39 5.39 0 0 1-4.4 2.26 5.4 5.4 0 0 1-3.14-9.8A9.3 9.3 0 0 0 12 3Z"/></svg>
+        <svg class="icone-lua" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.39 5.39 0 0 1-4.4 2.26 5.4 5.4 0 0 1-3.14-9.8A9.3 9.3 0 0 0 12 3Z"/></svg>
+        <svg class="icone-sol" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0-6 1 3h-2l1-3Zm0 22-1-3h2l-1 3ZM1 12l3-1v2l-3-1Zm22 0-3 1v-2l3 1ZM4.2 4.2l2.8 1.4-1.4 1.4-1.4-2.8Zm15.6 15.6L17 18.4l1.4-1.4 1.4 2.8ZM4.2 19.8 5.6 17 7 18.4l-2.8 1.4ZM19.8 4.2 18.4 7 17 5.6l2.8-1.4Z"/></svg>
       </button>
-      <button class="btn btn-instalar" type="button" id="instalar-app" hidden>
+      <button class="btn btn-instalar" type="button" id="instalar-app" aria-label="Instalar aplicativo" hidden>
         <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M11 3h2v9.17l3.59-3.58L18 10l-6 6-6-6 1.41-1.41L11 12.17V3Zm-7 15h16v2H4v-2Z"/></svg>
-        Instalar app
+        <span class="btn-instalar-texto">Instalar app</span>
       </button>
     </div>
   </div>

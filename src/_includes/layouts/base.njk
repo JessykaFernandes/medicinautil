@@ -8,7 +8,8 @@
   <title>{{ tituloPagina }}</title>
   <meta name="description" content="{{ descPagina | resumir(170) }}">
   <link rel="canonical" href="{{ page.url | absoluta }}">
-  <meta name="theme-color" content="{{ site.cor_tema }}">
+  <meta name="theme-color" content="{{ site.cor_tema }}" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1d150d" media="(prefers-color-scheme: dark)">
   <meta name="color-scheme" content="light dark">
   <meta name="base-path" content="{{ basePath }}">
   <meta name="build-id" content="{{ buildId }}">

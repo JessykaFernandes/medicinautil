@@ -1,4 +1,4 @@
-/* MedAcervo — scripts do site/aplicativo. Sem dependências externas. */
+/* Medicina Útil — scripts do site/aplicativo. Sem dependências externas. */
 (function () {
   "use strict";
 
