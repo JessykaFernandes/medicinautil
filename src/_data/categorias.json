@@ -1,0 +1,23 @@
+{
+  "lista": [
+    { "slug": "anatomia", "nome": "Anatomia", "icone": "🦴" },
+    { "slug": "fisiologia", "nome": "Fisiologia", "icone": "🫀" },
+    { "slug": "bioquimica", "nome": "Bioquímica", "icone": "🧪" },
+    { "slug": "histologia-embriologia", "nome": "Histologia e Embriologia", "icone": "🔬" },
+    { "slug": "farmacologia", "nome": "Farmacologia", "icone": "💊" },
+    { "slug": "patologia", "nome": "Patologia", "icone": "🧫" },
+    { "slug": "microbiologia-imunologia", "nome": "Microbiologia e Imunologia", "icone": "🦠" },
+    { "slug": "semiologia", "nome": "Semiologia", "icone": "🩺" },
+    { "slug": "clinica-medica", "nome": "Clínica Médica", "icone": "🏥" },
+    { "slug": "cardiologia", "nome": "Cardiologia", "icone": "❤️" },
+    { "slug": "pneumologia", "nome": "Pneumologia", "icone": "🫁" },
+    { "slug": "neurologia", "nome": "Neurologia", "icone": "🧠" },
+    { "slug": "cirurgia", "nome": "Cirurgia", "icone": "🔪" },
+    { "slug": "pediatria", "nome": "Pediatria", "icone": "👶" },
+    { "slug": "ginecologia-obstetricia", "nome": "Ginecologia e Obstetrícia", "icone": "🤰" },
+    { "slug": "psiquiatria", "nome": "Psiquiatria", "icone": "🧩" },
+    { "slug": "emergencia", "nome": "Urgência e Emergência", "icone": "🚑" },
+    { "slug": "saude-coletiva", "nome": "Saúde Coletiva", "icone": "🌎" },
+    { "slug": "estudos-carreira", "nome": "Estudos e Carreira", "icone": "🎓" }
+  ]
+}

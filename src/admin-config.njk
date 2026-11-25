@@ -1,0 +1,118 @@
+---
+permalink: /admin/config.yml
+eleventyExcludeFromCollections: true
+---
+# Configuração do painel /admin (gerada automaticamente a partir de src/_data).
+backend:
+  name: github
+  repo: {{ site.github_repo }}
+  branch: {{ site.github_branch or "main" }}
+  commit_messages:
+    create: "Publica: {% raw %}{{slug}}{% endraw %}"
+    update: "Atualiza: {% raw %}{{slug}}{% endraw %}"
+    delete: "Remove: {% raw %}{{slug}}{% endraw %}"
+    uploadMedia: "Envia arquivo: {% raw %}{{path}}{% endraw %}"
+    deleteMedia: "Remove arquivo: {% raw %}{{path}}{% endraw %}"
+
+site_url: {{ "/" | absoluta }}
+display_url: {{ "/" | absoluta }}
+logo_url: {{ "/assets/icons/icon-192.png" | absoluta }}
+media_folder: src/arquivos
+public_folder: /arquivos
+media_libraries:
+  default:
+    config:
+      max_file_size: 95000000
+      slugify_filename: true
+
+slug:
+  encoding: ascii
+  clean_accents: true
+  sanitize_replacement: "-"
+
+collections:
+  - name: conteudos
+    label: Conteúdos
+    label_singular: Conteúdo
+    description: "Resumos, artigos (blog) e materiais em PDF. Depois de salvar, o site atualiza sozinho em 1 a 3 minutos."
+    folder: src/conteudos
+    create: true
+    delete: true
+    extension: md
+    format: frontmatter
+    slug: "{% raw %}{{slug}}{% endraw %}"
+    summary: "{% raw %}{{title}} — {{tipo}} ({{date}}){% endraw %}"
+    sortable_fields: [date, title, tipo, categoria]
+    view_filters:
+      - { label: "Resumos", field: tipo, pattern: "resumo" }
+      - { label: "Artigos", field: tipo, pattern: "artigo" }
+      - { label: "PDFs", field: tipo, pattern: "pdf" }
+      - { label: "Rascunhos", field: rascunho, pattern: true }
+    fields:
+      - { label: "Título", name: title, widget: string }
+      - { label: "Descrição curta (aparece no Google e nos cartões)", name: description, widget: text, required: false }
+      - { label: "Data", name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD" }
+      - label: "Tipo"
+        name: tipo
+        widget: select
+        default: resumo
+        options:
+          {%- for t in tipos.lista %}
+          - { label: {{ t.singular | json | safe }}, value: {{ t.slug | json | safe }} }
+          {%- endfor %}
+      - label: "Disciplina"
+        name: categoria
+        widget: select
+        options:
+          {%- for c in categorias.lista %}
+          - { label: {{ c.nome | json | safe }}, value: {{ c.slug | json | safe }} }
+          {%- endfor %}
+      - { label: "Assuntos (tags)", name: tags, widget: list, required: false, hint: "Ex.: hipertensão, diretriz, ECG" }
+      - { label: "Arquivo PDF (opcional)", name: arquivo, widget: file, required: false, hint: "Envie um PDF. Ele aparecerá com botões de abrir, baixar e salvar offline." }
+      - { label: "Imagem de capa (opcional)", name: capa, widget: image, required: false }
+      - { label: "Autor (opcional)", name: autor, widget: string, required: false }
+      - { label: "Rascunho (não publicar ainda)", name: rascunho, widget: boolean, default: false, required: false }
+      - { label: "Texto", name: body, widget: markdown, required: false }
+
+  - name: configuracoes
+    label: Configurações do site
+    editor:
+      preview: false
+    files:
+      - name: site
+        label: Dados gerais e anúncios
+        file: src/_data/site.json
+        fields:
+          - { label: "Nome do site", name: nome, widget: string }
+          - { label: "Slogan", name: slogan, widget: string }
+          - { label: "Descrição", name: descricao, widget: text }
+          - { label: "Endereço do site (URL)", name: url, widget: string }
+          - { label: "Idioma", name: idioma, widget: string, default: "pt-BR" }
+          - { label: "Autor/Equipe", name: autor, widget: string }
+          - { label: "E-mail de contato", name: email_contato, widget: string }
+          - { label: "Instagram (sem @)", name: instagram, widget: string, required: false }
+          - { label: "Repositório GitHub (usuario/repositorio)", name: github_repo, widget: string }
+          - { label: "Branch", name: github_branch, widget: string, default: "main" }
+          - { label: "Cor do tema", name: cor_tema, widget: color }
+          - label: "Google AdSense"
+            name: adsense
+            widget: object
+            fields:
+              - { label: "ID do editor (ca-pub-...)", name: client, widget: string, required: false }
+              - { label: "Slot: topo", name: slot_topo, widget: string, required: false }
+              - { label: "Slot: meio do conteúdo", name: slot_conteudo, widget: string, required: false }
+              - { label: "Slot: lateral", name: slot_lateral, widget: string, required: false }
+              - { label: "Slot: rodapé", name: slot_rodape, widget: string, required: false }
+          - { label: "Google Analytics (G-...)", name: google_analytics, widget: string, required: false }
+      - name: categorias
+        label: Disciplinas
+        file: src/_data/categorias.json
+        fields:
+          - label: "Disciplinas"
+            name: lista
+            widget: list
+            summary: "{% raw %}{{fields.icone}} {{fields.nome}}{% endraw %}"
+            fields:
+              - { label: "Nome", name: nome, widget: string }
+              - { label: "Identificador (sem acento/espaço, ex.: clinica-medica)", name: slug, widget: string, pattern: ["^[a-z0-9-]+$", "Use apenas letras minúsculas, números e hífen"] }
+              - { label: "Ícone (emoji)", name: icone, widget: string }

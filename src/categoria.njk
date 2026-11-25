@@ -1,0 +1,38 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: categorias.lista
+  size: 1
+  alias: cat
+permalink: "/categoria/{{ cat.slug }}/"
+eleventyComputed:
+  title: "{{ cat.nome }}"
+  description: "Resumos, artigos e PDFs de {{ cat.nome }} para estudantes e profissionais de medicina."
+---
+{%- set itens = collections.conteudos | onde("categoria", cat.slug) %}
+<div class="container">
+  <nav class="migalhas" aria-label="Você está em"><a href="/">Início</a> <span aria-hidden="true">›</span> <a href="/categorias/">Disciplinas</a></nav>
+  <header class="pagina-cabecalho">
+    <h1><span aria-hidden="true">{{ cat.icone }}</span> {{ cat.nome }}</h1>
+    <p>{{ itens.length }} {{ "conteúdo" if itens.length == 1 else "conteúdos" }} nesta disciplina.</p>
+  </header>
+
+  {%- if itens.length %}
+  <div class="filtros" role="group" aria-label="Filtrar por tipo" data-filtro-lista data-filtro-campo="tipo">
+    <button class="chip ativo" type="button" data-filtro="">Todos</button>
+    {%- for t in tipos.lista %}{% set n = (itens | onde("tipo", t.slug)).length %}{% if n %}<button class="chip" type="button" data-filtro="{{ t.slug }}">{{ t.icone }} {{ t.nome }} ({{ n }})</button>{% endif %}{% endfor %}
+  </div>
+  {%- endif %}
+
+  {% set slotKey = "slot_topo" %}{% include "partials/anuncio.njk" %}
+
+  {%- if itens.length %}
+  <div class="cards-grid" data-lista-cards>
+    {%- for item in itens %}{% include "partials/card.njk" %}{% endfor %}
+  </div>
+  {%- else %}
+  <p class="vazio">Ainda não há conteúdos de {{ cat.nome }}. Volte em breve!</p>
+  {%- endif %}
+
+  {% set slotKey = "slot_conteudo" %}{% include "partials/anuncio.njk" %}
+</div>

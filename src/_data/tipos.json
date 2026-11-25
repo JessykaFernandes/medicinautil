@@ -1,0 +1,7 @@
+{
+  "lista": [
+    { "slug": "resumo", "nome": "Resumos", "singular": "Resumo", "url": "/resumos/", "icone": "📝", "descricao": "Resumos objetivos e organizados por disciplina." },
+    { "slug": "artigo", "nome": "Blog e Artigos", "singular": "Artigo", "url": "/blog/", "icone": "📰", "descricao": "Textos, revisões e dicas para a rotina médica." },
+    { "slug": "pdf", "nome": "Materiais em PDF", "singular": "PDF", "url": "/pdfs/", "icone": "📄", "descricao": "Arquivos para ler online ou baixar e estudar offline." }
+  ]
+}

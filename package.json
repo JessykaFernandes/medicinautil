@@ -1,0 +1,20 @@
+{
+  "name": "medacervo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Acervo de resumos, artigos e PDFs de medicina — site + aplicativo (PWA).",
+  "type": "module",
+  "scripts": {
+    "start": "npm run limpar && eleventy --serve",
+    "build": "npm run limpar && eleventy",
+    "verificar": "node scripts/verificar.mjs",
+    "test": "npm run build && npm run verificar",
+    "limpar": "node -e \"require('fs').rmSync('_site',{recursive:true,force:true})\""
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "3.1.8"
+  }
+}

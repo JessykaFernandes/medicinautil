@@ -1,0 +1,7 @@
+---
+layout: layouts/base.njk
+---
+<div class="container estreito">
+  <header class="pagina-cabecalho"><h1>{{ title }}</h1>{% if description %}<p>{{ description }}</p>{% endif %}</header>
+  <div class="prosa">{{ content | safe }}</div>
+</div>

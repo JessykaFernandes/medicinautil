@@ -1,0 +1,19 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: collections.listaTags
+  size: 1
+  alias: tag
+permalink: "/tags/{{ tag.slug }}/"
+eleventyComputed:
+  title: "#{{ tag.nome }}"
+  description: "Conteúdos de medicina sobre {{ tag.nome }}."
+---
+<div class="container">
+  <nav class="migalhas" aria-label="Você está em"><a href="/">Início</a> <span aria-hidden="true">›</span> <a href="/tags/">Assuntos</a></nav>
+  <header class="pagina-cabecalho"><h1>#{{ tag.nome }}</h1><p>{{ tag.itens.length }} {{ "conteúdo" if tag.itens.length == 1 else "conteúdos" }}.</p></header>
+  {% set slotKey = "slot_topo" %}{% include "partials/anuncio.njk" %}
+  <div class="cards-grid">
+    {%- for item in tag.itens %}{% include "partials/card.njk" %}{% endfor %}
+  </div>
+</div>

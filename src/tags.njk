@@ -1,0 +1,14 @@
+---
+layout: layouts/base.njk
+title: Assuntos
+description: Navegue pelos assuntos (tags) de todos os conteúdos.
+permalink: /tags/
+---
+<div class="container">
+  <header class="pagina-cabecalho"><h1>Assuntos</h1><p>{{ description }}</p></header>
+  {%- if collections.listaTags.length %}
+  <div class="nuvem-tags">
+    {%- for t in collections.listaTags %}<a class="chip" href="/tags/{{ t.slug }}/">#{{ t.nome }} <small>{{ t.itens.length }}</small></a>{% endfor %}
+  </div>
+  {%- else %}<p class="vazio">Nenhum assunto cadastrado ainda.</p>{% endif %}
+</div>

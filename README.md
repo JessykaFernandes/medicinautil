@@ -1,0 +1,186 @@
+# MedAcervo: site e aplicativo de medicina
+
+Site de resumos, artigos (blog) e PDFs de medicina, que também funciona como **aplicativo instalável no celular** (PWA) e já vem preparado para **anúncios do Google AdSense**.
+
+**Custo: R$ 0.** A hospedagem é o GitHub Pages (gratuito), a publicação é automática e o painel de publicação é gratuito.
+
+---
+
+## O que já vem pronto
+
+| Recurso | Detalhes |
+|---|---|
+| 📝 Resumos, 📰 Blog, 📄 PDFs | Cada conteúdo tem tipo, disciplina e assuntos (tags) |
+| 🗂️ 19 disciplinas | De Anatomia a Saúde Coletiva, todas editáveis pelo painel |
+| 🔍 Busca instantânea | Ignora acentos, busca dentro do texto e filtra por tipo e disciplina |
+| 📱 Aplicativo (PWA) | Instala no Android, iPhone e computador, sem loja |
+| 📴 Modo offline | Páginas visitadas, conteúdos "Salvos" e PDFs marcados abrem sem internet |
+| 🔖 Salvos | O leitor guarda os conteúdos favoritos no próprio aparelho |
+| 🌙 Tema escuro | Automático ou pelo botão da lua |
+| 💰 Anúncios | Google AdSense em 4 posições (topo, meio, lateral, rodapé) + `ads.txt` |
+| 🔎 SEO | Sitemap, RSS, Open Graph (prévia no WhatsApp), dados estruturados |
+| ⚖️ Páginas exigidas pelo AdSense | Sobre, Contato, Política de Privacidade (LGPD), Termos de Uso, aviso de cookies |
+| 🛡️ Proteção contra erros | Toda publicação é verificada; se houver erro (link quebrado, PDF faltando etc.), nada vai ao ar e o site atual continua funcionando |
+| ✍️ Painel `/admin` | Publique textos e envie PDFs pelo navegador (inclusive pelo celular) |
+
+---
+
+## Passo 1: Criar a conta e o repositório no GitHub (5 min)
+
+1. Crie uma conta gratuita em **github.com**. O nome de usuário fará parte do endereço do site.
+2. Clique em **New repository** e use exatamente o nome `SEU-USUARIO.github.io` (troque pelo seu usuário).
+   - Exemplo: usuário `medjoao` → repositório `medjoao.github.io` → site em `https://medjoao.github.io`
+   - **Por que esse nome?** O site fica na raiz do domínio, condição necessária para o arquivo `ads.txt` do AdSense funcionar.
+3. Marque **Public** e clique em **Create repository**.
+
+## Passo 2: Ajustar seus dados (2 min)
+
+Abra `src/_data/site.json` e troque:
+
+```json
+"url": "https://SEU-USUARIO.github.io",
+"github_repo": "SEU-USUARIO/SEU-USUARIO.github.io",
+"email_contato": "seu-email@exemplo.com",
+```
+
+Se quiser, troque também `"nome"` e `"slogan"`.
+
+## Passo 3: Enviar os arquivos (5 min)
+
+A forma mais simples é o **GitHub Desktop** (gratuito: desktop.github.com):
+
+1. Instale, entre com sua conta e escolha **File → Add local repository**, selecionando a pasta `medacervo`. A pasta já é um repositório git com o primeiro commit feito.
+2. Clique em **Publish repository**. Se já criou o repositório no passo 1, use **Repository → Repository settings → Remote** e cole `https://github.com/SEU-USUARIO/SEU-USUARIO.github.io.git`. Depois clique em **Push origin**.
+
+Pelo terminal, a alternativa é:
+
+```bash
+git remote add origin https://github.com/SEU-USUARIO/SEU-USUARIO.github.io.git
+```
+
+```bash
+git push -u origin main
+```
+
+> ⚠️ Não use o upload por arrastar no site do GitHub: ele pode ignorar a pasta oculta `.github`, que faz a publicação automática.
+
+## Passo 4: Ligar o GitHub Pages (1 min)
+
+No repositório: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+
+Pronto. Em 1 a 3 minutos o site estará no ar em `https://SEU-USUARIO.github.io`, e o progresso aparece na aba **Actions**. A partir daí, cada alteração publica sozinha.
+
+## Passo 5: Configurar o painel de publicação `/admin` (3 min)
+
+1. No GitHub: foto do perfil → **Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token**.
+2. Em **Repository access**, escolha **Only select repositories** e marque o repositório do site.
+3. Em **Permissions → Repository permissions → Contents**, escolha **Read and write**.
+4. Gere o token e copie. Guarde-o como uma senha e não compartilhe.
+5. Acesse `https://SEU-USUARIO.github.io/admin/`, escolha **Sign in with Token** e cole o token.
+
+Para publicar no painel:
+- **Conteúdos → New**: preencha título, descrição, tipo (Resumo, Artigo ou PDF) e disciplina.
+- Para PDF, use o campo **Arquivo PDF**: ele ganha botões *Abrir*, *Baixar* e *Disponível offline*, e o visualizador embutido no computador.
+- Clique em **Save**. O site atualiza sozinho em 1 a 3 minutos.
+- **Configurações do site**: altere nome, e-mail, IDs do AdSense e a lista de disciplinas sem mexer em código.
+- Para guardar sem publicar, marque **Rascunho**.
+
+> O token expira na data escolhida. Quando expirar, gere outro (passos 1 a 4).
+
+---
+
+## Passo 6: Ativar os anúncios (Google AdSense)
+
+1. Com o site no ar e **alguns conteúdos originais publicados**, crie a conta em **adsense.google.com**. É preciso ter 18 anos ou mais e informar dados bancários e fiscais para receber.
+2. Adicione o site `SEU-USUARIO.github.io`.
+3. O AdSense mostra seu ID de editor (`ca-pub-1234567890123456`). Cole-o no painel `/admin` → **Configurações do site → Google AdSense → ID do editor**, ou diretamente em `src/_data/site.json` no campo `adsense.client`.
+   - Isso já insere o código de verificação em todas as páginas **e** gera o `ads.txt` automaticamente.
+4. Clique em **Verificar** no AdSense e aguarde a análise, que pode levar de dias a algumas semanas.
+5. Depois da aprovação, escolha uma das opções:
+   - **Anúncios automáticos** (mais fácil): ative em *Anúncios → Por site*. O Google posiciona sozinho, sem precisar de mais nada.
+   - **Blocos manuais** (mais controle): crie blocos de "Anúncio de display" responsivos e cole cada número (`data-ad-slot`) nos campos *Slot topo / meio / lateral / rodapé*. Os blocos aparecem nas posições já reservadas no layout.
+6. **Privacidade e mensagens** (no AdSense): ative a mensagem de consentimento do Google para visitantes da Europa. É gratuita e não exige código.
+
+O pagamento é feito quando o saldo atinge o valor mínimo definido pelo AdSense para o Brasil.
+
+### ⚠️ Pontos importantes para ser aprovado e não perder a conta
+
+- **Domínio:** o AdSense exige que você comprove a posse do site. Endereços gratuitos `*.github.io` **podem ser recusados**. Se isso acontecer, a solução é um domínio próprio `.com.br` no Registro.br (cerca de R$ 40/ano, o único custo possível). Para conectá-lo, crie o arquivo `src/CNAME` contendo apenas o domínio (ex.: `medacervo.com.br`), configure o DNS conforme a página *Settings → Pages* e troque o `url` no `site.json`.
+- **Direitos autorais:** **não publique PDFs de livros, apostilas de cursinho ou slides de professores sem autorização.** Isso viola a Lei 9.610/98, gera denúncias que derrubam o repositório e é motivo de banimento definitivo do AdSense. Publique materiais **seus** (resumos, mapas mentais, roteiros) citando as fontes.
+- **Conteúdo médico:** o Google é mais rigoroso com temas de saúde (YMYL). Conteúdo original, com referências (como nos exemplos), aumenta a chance de aprovação.
+- **Nunca clique nos próprios anúncios** nem peça para outras pessoas clicarem: é a principal causa de banimento.
+
+---
+
+## Aplicativo no celular
+
+O site **é** o aplicativo, sem loja e sem custo:
+- **Android (Chrome):** botão **Instalar app** no topo do site, ou menu ⋮ → *Instalar app*.
+- **iPhone (Safari):** botão **Instalar app** (mostra as instruções) → Compartilhar → *Adicionar à Tela de Início*.
+- **Computador (Chrome/Edge):** ícone de instalar na barra de endereço.
+
+**Opcional, na Google Play:** em **pwabuilder.com**, cole o endereço do site e gere o pacote Android. A publicação na Play Store exige a taxa única de cadastro de desenvolvedor do Google (US$ 25). Não é necessário para o app funcionar.
+
+---
+
+## Escrevendo conteúdos sem o painel (opcional)
+
+Cada conteúdo é um arquivo `.md` em `src/conteudos/`:
+
+```markdown
+---
+title: "Insuficiência cardíaca: classificação"
+description: "Resumo das classificações da IC."
+date: 2026-12-01
+tipo: resumo            # resumo | artigo | pdf
+categoria: cardiologia  # identificador da disciplina (src/_data/categorias.json)
+tags: [insuficiência cardíaca, diretriz]
+arquivo: /arquivos/meu-arquivo.pdf   # opcional
+---
+
+## Título da seção
+
+Texto em **Markdown**: tabelas, listas, citações...
+
+## Referências
+- Autor. Título. Edição. Editora; ano.
+```
+
+Coloque os PDFs em `src/arquivos/`. O limite do GitHub é de 100 MB por arquivo; comprima PDFs grandes.
+
+Os três conteúdos de exemplo (hipertensão, métodos de estudo e roteiro de anamnese) podem ser editados ou apagados.
+
+## Testar no computador (opcional, para quem quiser)
+
+Requer Node.js 20 ou superior (nodejs.org).
+
+```bash
+npm install
+```
+
+```bash
+npm start
+```
+
+Abra http://localhost:8080. No modo de teste, os espaços de anúncio aparecem como caixas tracejadas.
+
+```bash
+npm test
+```
+
+`npm test` gera o site e roda a verificação automática de erros.
+
+## Estrutura
+
+```
+src/
+  _data/site.json        ← nome, URL, e-mail, AdSense, Analytics
+  _data/categorias.json  ← disciplinas
+  conteudos/             ← resumos, artigos e PDFs (.md)
+  arquivos/              ← PDFs e imagens enviados
+  _includes/             ← layouts e componentes
+  assets/                ← CSS, JS e ícones
+  admin/                 ← painel de publicação
+scripts/verificar.mjs    ← verificação automática antes de publicar
+.github/workflows/       ← publicação automática no GitHub Pages
+```

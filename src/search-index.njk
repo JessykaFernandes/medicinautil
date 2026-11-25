@@ -1,0 +1,10 @@
+---
+permalink: /search-index.json
+eleventyExcludeFromCollections: true
+---
+[
+{%- for item in collections.conteudos %}
+{%- set c = item.data.categoria | categoria(categorias.lista) %}
+{ "t": {{ item.data.title | json | safe }}, "d": {{ (item.data.description or "") | json | safe }}, "u": {{ item.url | comBase | json | safe }}, "c": {{ c.slug | json | safe }}, "cn": {{ (c.icone + " " + c.nome) | json | safe }}, "y": {{ item.data.tipo | json | safe }}, "g": {{ (item.data.tags | tagsVisiveis) | json | safe }}, "dt": {{ (item.date | dataBR) | json | safe }}, "f": {{ (true if item.data.arquivo else false) | json | safe }}, "x": {{ (item.content | textoPuro | resumir(4000)) | json | safe }} }{% if not loop.last %},{% endif %}
+{%- endfor %}
+]

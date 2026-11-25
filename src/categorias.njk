@@ -1,0 +1,23 @@
+---
+layout: layouts/base.njk
+title: Disciplinas
+description: Todas as disciplinas e especialidades disponíveis no acervo.
+permalink: /categorias/
+---
+<div class="container">
+  <header class="pagina-cabecalho">
+    <h1>Disciplinas</h1>
+    <p>{{ description }}</p>
+  </header>
+  <div class="disciplinas-grid grande">
+    {%- for c in categorias.lista %}
+    {%- set qtd = (collections.conteudos | onde("categoria", c.slug)).length %}
+    <a class="disciplina" href="/categoria/{{ c.slug }}/">
+      <span class="disciplina-icone" aria-hidden="true">{{ c.icone }}</span>
+      <span class="disciplina-nome">{{ c.nome }}</span>
+      <span class="disciplina-qtd">{{ qtd }}</span>
+    </a>
+    {%- endfor %}
+  </div>
+  {% set slotKey = "slot_conteudo" %}{% include "partials/anuncio.njk" %}
+</div>

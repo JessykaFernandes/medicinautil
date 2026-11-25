@@ -1,0 +1,12 @@
+{%- set _cat = item.data.categoria | categoria(categorias.lista) -%}
+<article class="card card-{{ item.data.tipo }}" data-categoria="{{ item.data.categoria }}" data-tipo="{{ item.data.tipo }}">
+  <a class="card-link" href="{{ item.url }}">
+    <div class="card-topo">
+      <span class="selo selo-{{ item.data.tipo }}">{% if item.data.tipo == "pdf" %}PDF{% elif item.data.tipo == "resumo" %}Resumo{% else %}Artigo{% endif %}</span>
+      <span class="card-cat">{{ _cat.icone }} {{ _cat.nome }}</span>
+    </div>
+    <h3 class="card-titulo">{{ item.data.title }}</h3>
+    <p class="card-desc">{{ item.data.description | resumir(150) }}</p>
+    <div class="card-meta"><time datetime="{{ item.date | dataISO }}">{{ item.date | dataBR }}</time>{% if item.data.arquivo %}<span>· 📎 arquivo</span>{% endif %}</div>
+  </a>
+</article>

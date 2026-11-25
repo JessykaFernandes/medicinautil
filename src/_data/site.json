@@ -1,0 +1,21 @@
+{
+  "nome": "MedAcervo",
+  "slogan": "Resumos, artigos e PDFs de medicina para estudantes e profissionais",
+  "descricao": "Acervo gratuito de resumos, artigos, blog e materiais em PDF de medicina, organizados por disciplina. Feito por estudante de medicina, para estudantes e profissionais da saúde.",
+  "url": "https://SEU-USUARIO.github.io",
+  "idioma": "pt-BR",
+  "autor": "Equipe MedAcervo",
+  "email_contato": "contato@exemplo.com",
+  "instagram": "",
+  "github_repo": "SEU-USUARIO/SEU-USUARIO.github.io",
+  "github_branch": "main",
+  "cor_tema": "#0f766e",
+  "adsense": {
+    "client": "",
+    "slot_topo": "",
+    "slot_conteudo": "",
+    "slot_lateral": "",
+    "slot_rodape": ""
+  },
+  "google_analytics": ""
+}

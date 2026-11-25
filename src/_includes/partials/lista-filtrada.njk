@@ -1,0 +1,29 @@
+{%- set itens = collections.conteudos | onde("tipo", tipoLista) if tipoLista else collections.conteudos %}
+<div class="container">
+  <header class="pagina-cabecalho">
+    <h1>{{ title }}</h1>
+    <p>{{ description }}</p>
+  </header>
+
+  {%- if itens.length %}
+  <div class="filtros" role="group" aria-label="Filtrar por disciplina" data-filtro-lista>
+    <button class="chip ativo" type="button" data-filtro="">Todas ({{ itens.length }})</button>
+    {%- for c in categorias.lista %}
+    {%- set n = (itens | onde("categoria", c.slug)).length %}
+    {%- if n %}<button class="chip" type="button" data-filtro="{{ c.slug }}">{{ c.icone }} {{ c.nome }} ({{ n }})</button>{% endif %}
+    {%- endfor %}
+  </div>
+  {%- endif %}
+
+  {% set slotKey = "slot_topo" %}{% include "partials/anuncio.njk" %}
+
+  {%- if itens.length %}
+  <div class="cards-grid" data-lista-cards>
+    {%- for item in itens %}{% include "partials/card.njk" %}{% endfor %}
+  </div>
+  {%- else %}
+  <p class="vazio">Ainda não há conteúdos aqui. Volte em breve!</p>
+  {%- endif %}
+
+  {% set slotKey = "slot_conteudo" %}{% include "partials/anuncio.njk" %}
+</div>

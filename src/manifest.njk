@@ -1,0 +1,30 @@
+---
+permalink: /manifest.webmanifest
+eleventyExcludeFromCollections: true
+---
+{
+  "id": {{ "/" | comBase | json | safe }},
+  "name": {{ site.nome | json | safe }},
+  "short_name": {{ site.nome | json | safe }},
+  "description": {{ site.descricao | json | safe }},
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "start_url": {{ (("/" | comBase) + "?origem=app") | json | safe }},
+  "scope": {{ "/" | comBase | json | safe }},
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "any",
+  "background_color": "#f7faf9",
+  "theme_color": {{ site.cor_tema | json | safe }},
+  "categories": ["education", "medical", "books"],
+  "icons": [
+    { "src": {{ "/assets/icons/icon-192.png" | comBase | json | safe }}, "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": {{ "/assets/icons/icon-512.png" | comBase | json | safe }}, "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": {{ "/assets/icons/icon-maskable-512.png" | comBase | json | safe }}, "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Buscar", "url": {{ "/buscar/" | comBase | json | safe }}, "icons": [{ "src": {{ "/assets/icons/icon-192.png" | comBase | json | safe }}, "sizes": "192x192" }] },
+    { "name": "Resumos", "url": {{ "/resumos/" | comBase | json | safe }}, "icons": [{ "src": {{ "/assets/icons/icon-192.png" | comBase | json | safe }}, "sizes": "192x192" }] },
+    { "name": "Salvos", "url": {{ "/salvos/" | comBase | json | safe }}, "icons": [{ "src": {{ "/assets/icons/icon-192.png" | comBase | json | safe }}, "sizes": "192x192" }] }
+  ]
+}

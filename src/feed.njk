@@ -1,0 +1,23 @@
+---
+permalink: /feed.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>{{ site.nome }}</title>
+  <link>{{ "/" | absoluta }}</link>
+  <atom:link href="{{ '/feed.xml' | absoluta }}" rel="self" type="application/rss+xml"/>
+  <description>{{ site.descricao }}</description>
+  <language>pt-br</language>
+  {%- for item in collections.conteudos | limite(30) %}
+  <item>
+    <title>{{ item.data.title }}</title>
+    <link>{{ item.url | absoluta }}</link>
+    <guid>{{ item.url | absoluta }}</guid>
+    <pubDate>{{ item.date | dataRFC }}</pubDate>
+    <description>{{ item.data.description }}</description>
+  </item>
+  {%- endfor %}
+</channel>
+</rss>

@@ -1,0 +1,111 @@
+---
+layout: layouts/base.njk
+---
+{%- set cat = categoria | categoria(categorias.lista) -%}
+{%- set nomeTipo = "Material em PDF" if tipo == "pdf" else ("Resumo" if tipo == "resumo" else "Artigo") -%}
+{%- set urlTipo = "/pdfs/" if tipo == "pdf" else ("/resumos/" if tipo == "resumo" else "/blog/") -%}
+<div class="container leitura-grid">
+  <article class="post" data-post-url="{{ page.url }}" data-post-titulo="{{ title }}" data-post-desc="{{ description }}" data-post-tipo="{{ tipo }}" data-post-cat="{{ cat.nome }}">
+    <nav class="migalhas" aria-label="Você está em">
+      <a href="/">Início</a> <span aria-hidden="true">›</span>
+      <a href="{{ urlTipo }}">{{ nomeTipo }}</a> <span aria-hidden="true">›</span>
+      <a href="/categoria/{{ cat.slug }}/">{{ cat.nome }}</a>
+    </nav>
+
+    <header class="post-cabecalho">
+      <span class="selo selo-{{ tipo }}">{{ nomeTipo }}</span>
+      <h1>{{ title }}</h1>
+      {%- if description %}<p class="post-desc">{{ description }}</p>{% endif %}
+      <div class="post-meta">
+        <a href="/categoria/{{ cat.slug }}/">{{ cat.icone }} {{ cat.nome }}</a>
+        <span>·</span><time datetime="{{ page.date | dataISO }}">{{ page.date | dataBR }}</time>
+        <span>·</span><span>{{ content | tempoLeitura }} min de leitura</span>
+        {%- if autor %}<span>·</span><span>por {{ autor }}</span>{% endif %}
+      </div>
+      <div class="post-acoes">
+        <button class="btn btn-contorno" type="button" data-acao="salvar" aria-pressed="false">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M6 2h12a1 1 0 0 1 1 1v19l-7-4.5L5 22V3a1 1 0 0 1 1-1Zm1 2v14.34l5-3.21 5 3.21V4H7Z"/></svg>
+          <span>Salvar</span>
+        </button>
+        <button class="btn btn-contorno" type="button" data-acao="compartilhar">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M18 16a3 3 0 0 0-2.4 1.2l-6.7-3.4a3 3 0 0 0 0-1.6l6.7-3.4A3 3 0 1 0 15 7l-6.7 3.4a3 3 0 1 0 0 3.2L15 17a3 3 0 1 0 3-1Z"/></svg>
+          <span>Compartilhar</span>
+        </button>
+        <button class="btn btn-contorno" type="button" data-acao="imprimir">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M6 2h12v5H6V2Zm-2 7h16a2 2 0 0 1 2 2v6h-4v5H6v-5H2v-6a2 2 0 0 1 2-2Zm4 8v3h8v-3H8Z"/></svg>
+          <span>Imprimir</span>
+        </button>
+      </div>
+    </header>
+
+    {% set slotKey = "slot_topo" %}{% include "partials/anuncio.njk" %}
+
+    {%- if arquivo %}
+    <section class="pdf-bloco" aria-label="Arquivo do material" data-arquivo="{{ arquivo }}">
+      <div class="pdf-info">
+        <span class="pdf-icone" aria-hidden="true">📄</span>
+        <div>
+          <strong>{{ arquivo | replace("/arquivos/", "") }}</strong>
+          <small>Leia online, baixe ou salve para ler sem internet.</small>
+        </div>
+      </div>
+      <div class="pdf-botoes">
+        <a class="btn btn-primario" href="{{ arquivo }}" target="_blank" rel="noopener">Abrir</a>
+        <a class="btn btn-contorno" href="{{ arquivo }}" download>Baixar</a>
+        <button class="btn btn-contorno" type="button" data-acao="offline-pdf">Disponível offline</button>
+      </div>
+      <object class="pdf-visualizador" data="{{ arquivo }}#view=FitH" type="application/pdf" aria-label="Visualização do PDF">
+        <p class="pdf-fallback">Seu navegador não exibe PDFs aqui. Use o botão <strong>Abrir</strong> ou <strong>Baixar</strong>.</p>
+      </object>
+    </section>
+    {%- endif %}
+
+    <div class="prosa">
+      {{ content | safe }}
+    </div>
+
+    {% set slotKey = "slot_conteudo" %}{% include "partials/anuncio.njk" %}
+
+    {%- set _tags = tags | tagsVisiveis %}
+    {%- if _tags.length %}
+    <div class="post-tags" aria-label="Assuntos">
+      {%- for t in _tags %}<a class="chip" href="/tags/{{ t | slugify }}/">#{{ t }}</a>{% endfor %}
+    </div>
+    {%- endif %}
+
+    <aside class="aviso-medico">
+      <strong>Aviso:</strong> material de caráter educacional, elaborado a partir da literatura de referência citada. Condutas devem sempre ser individualizadas e confirmadas em diretrizes atualizadas e por profissional habilitado.
+    </aside>
+  </article>
+
+  <aside class="lateral">
+    <div class="lateral-fixa">
+      {% set slotKey = "slot_lateral" %}{% include "partials/anuncio.njk" %}
+      {%- set rel = collections.conteudos | relacionados(collections.conteudos | onde("url", page.url) | first, 4) %}
+      {%- if rel.length %}
+      <section class="relacionados">
+        <h2>Leia também</h2>
+        <ul>
+          {%- for r in rel %}
+          <li><a href="{{ r.url }}"><span class="selo selo-{{ r.data.tipo }}">{{ "PDF" if r.data.tipo == "pdf" else ("Resumo" if r.data.tipo == "resumo" else "Artigo") }}</span>{{ r.data.title }}</a></li>
+          {%- endfor %}
+        </ul>
+      </section>
+      {%- endif %}
+    </div>
+  </aside>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "{{ 'LearningResource' if tipo == 'resumo' or tipo == 'pdf' else 'Article' }}",
+  "headline": {{ title | json | safe }},
+  "description": {{ (description or "") | json | safe }},
+  "datePublished": "{{ page.date | dataISO }}",
+  "inLanguage": "pt-BR",
+  "url": "{{ page.url | absoluta }}",
+  "author": { "@type": "Person", "name": {{ (autor or site.autor) | json | safe }} },
+  "publisher": { "@type": "Organization", "name": {{ site.nome | json | safe }} }
+}
+</script>

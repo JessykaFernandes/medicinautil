@@ -1,0 +1,76 @@
+---
+layout: layouts/base.njk
+---
+<section class="hero">
+  <div class="container hero-inner">
+    <p class="hero-sobretitulo">Para estudantes e profissionais de medicina</p>
+    <h1>Estude com <span class="destaque">resumos, artigos e PDFs</span> organizados por disciplina</h1>
+    <p class="hero-texto">{{ site.descricao }}</p>
+    <form class="busca-hero" action="/buscar/" method="get" role="search">
+      <label class="sr" for="q-hero">Buscar conteúdo</label>
+      <input id="q-hero" name="q" type="search" placeholder="Ex.: hipertensão, anamnese, farmacologia…" autocomplete="off" enterkeyhint="search">
+      <button class="btn btn-primario" type="submit">Buscar</button>
+    </form>
+    <div class="hero-numeros">
+      <span><strong>{{ (collections.conteudos | onde("tipo", "resumo")).length }}</strong> resumos</span>
+      <span><strong>{{ (collections.conteudos | onde("tipo", "artigo")).length }}</strong> artigos</span>
+      <span><strong>{{ (collections.conteudos | onde("tipo", "pdf")).length }}</strong> PDFs</span>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <section class="tipos-grid" aria-label="Tipos de conteúdo">
+    {%- for t in tipos.lista %}
+    <a class="tipo-card tipo-{{ t.slug }}" href="{{ t.url }}">
+      <span class="tipo-icone" aria-hidden="true">{{ t.icone }}</span>
+      <strong>{{ t.nome }}</strong>
+      <small>{{ t.descricao }}</small>
+    </a>
+    {%- endfor %}
+  </section>
+
+  {% set slotKey = "slot_topo" %}{% include "partials/anuncio.njk" %}
+
+  <section class="secao">
+    <div class="secao-cabecalho">
+      <h2>Publicados recentemente</h2>
+      <a href="/buscar/">Ver tudo →</a>
+    </div>
+    {%- set recentes = collections.conteudos | limite(9) %}
+    {%- if recentes.length %}
+    <div class="cards-grid">
+      {%- for item in recentes %}{% include "partials/card.njk" %}{% endfor %}
+    </div>
+    {%- else %}
+    <p class="vazio">Nenhum conteúdo publicado ainda.</p>
+    {%- endif %}
+  </section>
+
+  {% set slotKey = "slot_conteudo" %}{% include "partials/anuncio.njk" %}
+
+  <section class="secao">
+    <div class="secao-cabecalho">
+      <h2>Disciplinas</h2>
+      <a href="/categorias/">Todas →</a>
+    </div>
+    <div class="disciplinas-grid">
+      {%- for c in categorias.lista %}
+      {%- set qtd = (collections.conteudos | onde("categoria", c.slug)).length %}
+      <a class="disciplina" href="/categoria/{{ c.slug }}/">
+        <span class="disciplina-icone" aria-hidden="true">{{ c.icone }}</span>
+        <span class="disciplina-nome">{{ c.nome }}</span>
+        <span class="disciplina-qtd">{{ qtd }}</span>
+      </a>
+      {%- endfor %}
+    </div>
+  </section>
+
+  <section class="secao app-chamada">
+    <div>
+      <h2>Leve o {{ site.nome }} no bolso 📱</h2>
+      <p>Instale como aplicativo no celular ou computador, sem loja e sem ocupar quase nada. Abra direto da tela inicial e leia seus materiais salvos mesmo sem internet.</p>
+    </div>
+    <button class="btn btn-primario btn-grande" type="button" data-acao="instalar">Instalar aplicativo</button>
+  </section>
+</div>

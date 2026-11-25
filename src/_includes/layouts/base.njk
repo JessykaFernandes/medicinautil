@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="{{ site.idioma }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  {%- set tituloPagina = (title + " · " + site.nome) if title else (site.nome + " — " + site.slogan) %}
+  {%- set descPagina = description or site.descricao %}
+  <title>{{ tituloPagina }}</title>
+  <meta name="description" content="{{ descPagina | resumir(170) }}">
+  <link rel="canonical" href="{{ page.url | absoluta }}">
+  <meta name="theme-color" content="{{ site.cor_tema }}">
+  <meta name="color-scheme" content="light dark">
+  <meta name="base-path" content="{{ basePath }}">
+  <meta name="build-id" content="{{ buildId }}">
+  {%- if noindex %}<meta name="robots" content="noindex">{% endif %}
+
+  <meta property="og:site_name" content="{{ site.nome }}">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:type" content="{{ 'article' if tipo else 'website' }}">
+  <meta property="og:title" content="{{ title or site.nome }}">
+  <meta property="og:description" content="{{ descPagina | resumir(200) }}">
+  <meta property="og:url" content="{{ page.url | absoluta }}">
+  <meta property="og:image" content="{{ (capa or '/assets/icons/og-image.jpg') | absoluta }}">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/icons/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="{{ site.nome }}">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="alternate" type="application/rss+xml" title="{{ site.nome }}" href="/feed.xml">
+
+  <script>
+    /* Aplica o tema salvo antes de desenhar a página (evita "piscar") */
+    try { var t = localStorage.getItem("tema"); if (t === "escuro" || t === "claro") document.documentElement.dataset.tema = t; } catch (e) {}
+  </script>
+  <link rel="stylesheet" href="/assets/css/style.css?v={{ buildId }}">
+
+  {%- set adClient = (site.adsense.client or "") | trim %}
+  {%- if adClient %}
+  <meta name="google-adsense-account" content="{{ adClient }}">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ adClient }}" crossorigin="anonymous"></script>
+  {%- endif %}
+  {%- set ga = (site.google_analytics or "") | trim %}
+  {%- if ga %}
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ ga }}"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","{{ ga }}");</script>
+  {%- endif %}
+  {%- block head %}{% endblock %}
+</head>
+<body>
+  <a class="pular" href="#principal">Pular para o conteúdo</a>
+  {% include "partials/cabecalho.njk" %}
+
+  <main id="principal" class="principal">
+    {% block conteudo %}{{ content | safe }}{% endblock %}
+  </main>
+
+  {% include "partials/rodape.njk" %}
+  {% include "partials/nav-inferior.njk" %}
+
+  <div class="aviso-cookies" id="aviso-cookies" hidden role="dialog" aria-live="polite" aria-label="Aviso de cookies">
+    <p>Usamos cookies para funcionamento do site e exibição de anúncios. Saiba mais na <a href="/privacidade/">Política de Privacidade</a>.</p>
+    <button class="btn btn-primario" type="button" id="aceitar-cookies">Entendi</button>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <dialog class="modal" id="modal-ios">
+    <h2>Instalar no iPhone / iPad</h2>
+    <ol>
+      <li>Abra este site no <strong>Safari</strong>.</li>
+      <li>Toque em <strong>Compartilhar</strong> <span aria-hidden="true">⬆️</span>.</li>
+      <li>Escolha <strong>Adicionar à Tela de Início</strong>.</li>
+    </ol>
+    <form method="dialog"><button class="btn btn-primario">Ok</button></form>
+  </dialog>
+
+  <script src="/assets/js/app.js?v={{ buildId }}" defer></script>
+  {%- block scripts %}{% endblock %}
+</body>
+</html>

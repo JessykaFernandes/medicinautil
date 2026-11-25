@@ -1,0 +1,31 @@
+<footer class="rodape">
+  {% set slotKey = "slot_rodape" %}{% include "partials/anuncio.njk" %}
+  <div class="container rodape-grid">
+    <div>
+      <a class="logo" href="/"><img src="/assets/icons/favicon.svg" alt="" width="28" height="28"><span>{{ site.nome }}</span></a>
+      <p class="rodape-texto">{{ site.slogan }}.</p>
+      <p class="rodape-aviso">Conteúdo educacional. Não substitui avaliação, diagnóstico ou tratamento por profissional habilitado.</p>
+    </div>
+    <div>
+      <h2>Conteúdos</h2>
+      <ul>
+        <li><a href="/resumos/">Resumos</a></li>
+        <li><a href="/blog/">Blog e artigos</a></li>
+        <li><a href="/pdfs/">Materiais em PDF</a></li>
+        <li><a href="/categorias/">Disciplinas</a></li>
+        <li><a href="/tags/">Assuntos</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>Institucional</h2>
+      <ul>
+        <li><a href="/sobre/">Sobre</a></li>
+        <li><a href="/contato/">Contato</a></li>
+        <li><a href="/privacidade/">Política de Privacidade</a></li>
+        <li><a href="/termos/">Termos de Uso</a></li>
+        <li><a href="/feed.xml">RSS</a></li>
+      </ul>
+    </div>
+  </div>
+  <p class="container rodape-copy">© {% ano %} {{ site.nome }}. Todos os direitos reservados.</p>
+</footer>

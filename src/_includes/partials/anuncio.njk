@@ -1,0 +1,11 @@
+{#- Bloco de anúncio. Uso: {% set slotKey = "slot_conteudo" %}{% include "partials/anuncio.njk" %} -#}
+{%- set _adClient = (site.adsense.client or "") | trim -%}
+{%- set _adSlot = (site.adsense[slotKey] or "") | trim -%}
+{%- if _adClient and _adSlot %}
+<div class="anuncio anuncio-{{ slotKey }}">
+  <span class="anuncio-rotulo">Publicidade</span>
+  <ins class="adsbygoogle" style="display:block" data-ad-client="{{ _adClient }}" data-ad-slot="{{ _adSlot }}" data-ad-format="auto" data-full-width-responsive="true"></ins>
+</div>
+{%- elif eleventy.env.runMode == "serve" %}
+<div class="anuncio anuncio-preview" aria-hidden="true"><span>Espaço de anúncio ({{ slotKey }}) — visível só no modo de teste</span></div>
+{%- endif %}

@@ -1,0 +1,10 @@
+---
+permalink: /ads.txt
+eleventyExcludeFromCollections: true
+---
+{%- set c = (site.adsense.client or "") | trim %}
+{%- if c %}
+google.com, {{ c | replace("ca-", "") }}, DIRECT, f08c47fec0942fa0
+{%- else %}
+# Preencha "adsense.client" em src/_data/site.json para gerar este arquivo.
+{%- endif %}

@@ -1,0 +1,28 @@
+---
+layout: layouts/base.njk
+title: Buscar
+description: Pesquise em todos os resumos, artigos e PDFs do acervo.
+permalink: /buscar/
+---
+<div class="container">
+  <header class="pagina-cabecalho"><h1>Buscar</h1><p>{{ description }}</p></header>
+  <form class="busca-pagina" role="search" id="form-busca" onsubmit="return false">
+    <label class="sr" for="q">Termo de busca</label>
+    <input id="q" name="q" type="search" placeholder="Digite um tema, doença, fármaco…" autocomplete="off" enterkeyhint="search" autofocus>
+    <div class="busca-filtros">
+      <label class="sr" for="f-tipo">Tipo</label>
+      <select id="f-tipo">
+        <option value="">Todos os tipos</option>
+        {%- for t in tipos.lista %}<option value="{{ t.slug }}">{{ t.nome }}</option>{% endfor %}
+      </select>
+      <label class="sr" for="f-cat">Disciplina</label>
+      <select id="f-cat">
+        <option value="">Todas as disciplinas</option>
+        {%- for c in categorias.lista %}<option value="{{ c.slug }}">{{ c.nome }}</option>{% endfor %}
+      </select>
+    </div>
+  </form>
+  <p class="busca-status" id="busca-status" aria-live="polite">Carregando índice…</p>
+  <div class="cards-grid" id="resultados"></div>
+  {% set slotKey = "slot_conteudo" %}{% include "partials/anuncio.njk" %}
+</div>
