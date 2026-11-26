@@ -7,7 +7,10 @@ const rawPrefix = process.env.PATH_PREFIX || "/";
 const pathPrefix = ("/" + rawPrefix.replace(/^\/+|\/+$/g, "") + "/").replace(/\/+/g, "/");
 
 const site = JSON.parse(fs.readFileSync("./src/_data/site.json", "utf8"));
-const siteOrigin = (process.env.SITE_ORIGIN || site.url || "").replace(/\/+$/, "");
+// Sempre https em produção (o GitHub informa "http://" antes de o HTTPS ser ativado)
+const siteOrigin = (process.env.SITE_ORIGIN || site.url || "")
+  .replace(/\/+$/, "")
+  .replace(/^http:\/\/(?!localhost|127\.0\.0\.1)/, "https://");
 
 const MESES = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"];
 
