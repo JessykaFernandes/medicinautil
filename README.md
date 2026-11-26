@@ -26,52 +26,12 @@ Site de resumos, artigos (blog) e PDFs de medicina, que também funciona como **
 
 ---
 
-## Passo 1: Registrar o domínio medicinautil.com
+## Configuração inicial (concluída)
 
-1. Verifique se o domínio está livre e registre-o em um registrador de `.com`. Opções conhecidas: **Cloudflare Registrar** (cobra preço de custo e não aumenta na renovação), Namecheap, Porkbun ou GoDaddy. O Registro.br só vende domínios `.br`; se preferir `medicinautil.com.br`, ele é registrado lá.
-2. Ative a renovação automática para não perder o domínio.
-
-## Passo 2: Criar a conta e o repositório no GitHub (5 min)
-
-1. Crie uma conta gratuita em **github.com**.
-2. Clique em **New repository**, use o nome `medicinautil`, marque **Public** e clique em **Create repository**.
-
-## Passo 3: Ajustar seus dados (2 min)
-
-Abra `src/_data/site.json` e troque o usuário do GitHub:
-
-```json
-"github_repo": "JessykaFernandes/medicinautil",
-```
-
-Nome (**Medicina Útil**), endereço (`https://medicinautil.com`) e cores já estão configurados. O arquivo `src/CNAME` com o domínio também já existe.
-
-O e-mail de contato está como `contato@medicinautil.com`. Para recebê-lo de graça no seu Gmail, use o **Cloudflare Email Routing** (gratuito, para domínios no Cloudflare) ou o ImprovMX. Se preferir, troque pelo seu e-mail pessoal.
-
-## Passo 4: Enviar os arquivos (5 min)
-
-A forma mais simples é o **GitHub Desktop** (gratuito: desktop.github.com):
-
-1. Instale, entre com sua conta e escolha **File → Add local repository**, selecionando a pasta do projeto. A pasta já é um repositório git com commit feito.
-2. Em **Repository → Repository settings → Remote**, cole `https://github.com/JessykaFernandes/medicinautil.git` e clique em **Push origin**.
-
-Pelo terminal, a alternativa é:
-
-```bash
-git remote add origin https://github.com/JessykaFernandes/medicinautil.git
-```
-
-```bash
-git push -u origin main
-```
-
-> ⚠️ Não use o upload por arrastar no site do GitHub: ele pode ignorar a pasta oculta `.github`, que faz a publicação automática.
-
-## Passo 5: Ligar o GitHub Pages e conectar o domínio (10 min)
-
-1. No repositório: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-2. Ainda em **Settings → Pages → Custom domain**, digite `medicinautil.com` e salve.
-3. No painel do registrador (seção **DNS**), crie estes registros:
+- ✅ Domínio **medicinautil.com** registrado.
+- ✅ Projeto enviado ao repositório `medicinautil` no GitHub.
+- ✅ GitHub Pages ligado (Source: GitHub Actions) e domínio personalizado configurado.
+- ✅ Registros de DNS criados no registrador:
 
 | Tipo | Nome | Valor |
 |---|---|---|
@@ -79,11 +39,11 @@ git push -u origin main
 | A | `@` | `185.199.109.153` |
 | A | `@` | `185.199.110.153` |
 | A | `@` | `185.199.111.153` |
-| CNAME | `www` | `jessykafernandes.github.io` |
+| CNAME | `www` | o endereço `.github.io` da conta dona do repositório |
 
-   > No Cloudflare, deixe esses registros como **"DNS only"** (nuvem cinza) até o GitHub emitir o certificado.
-4. Aguarde a propagação, que pode levar de minutos a algumas horas. Depois, marque **Enforce HTTPS** em *Settings → Pages*.
-5. Pronto: o site estará em **https://medicinautil.com**. Enquanto o domínio não propaga, ele já funciona em `https://jessykafernandes.github.io/medicinautil/`, porque o site se ajusta sozinho ao endereço.
+Quando o DNS propagar, marque **Enforce HTTPS** em *Settings → Pages*.
+
+O campo `github_repo` em `src/_data/site.json` aponta para o repositório do site. Ele só é usado pelo painel `/admin` e não aparece para os visitantes.
 
 ## Passo 6: Configurar o painel de publicação `/admin` (3 min)
 
