@@ -11,7 +11,7 @@
   "github_branch": "main",
   "cor_tema": "#ea580c",
   "adsense": {
-    "client": "<script async src=\"https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2440010814209185\"      crossorigin=\"anonymous\"></script>",
+    "client": "ca-pub-2440010814209185",
     "slot_topo": "",
     "slot_conteudo": "",
     "slot_lateral": "",
