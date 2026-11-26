@@ -97,8 +97,13 @@
     },
     {
       "nome": "SOI - SISTEMAS ORGÂNICOS INTEGRADOS",
-      "slug": "integrador",
+      "slug": "soi",
       "icone": "💀"
+    },
+    {
+      "nome": "HAM - HABILIDADES E ATITUDES MÉDICAS",
+      "slug": "ham",
+      "icone": "🧑🏾‍💼"
     }
   ]
 }
