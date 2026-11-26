@@ -1,23 +1,104 @@
 {
   "lista": [
-    { "slug": "anatomia", "nome": "Anatomia", "icone": "🦴" },
-    { "slug": "fisiologia", "nome": "Fisiologia", "icone": "🫀" },
-    { "slug": "bioquimica", "nome": "Bioquímica", "icone": "🧪" },
-    { "slug": "histologia-embriologia", "nome": "Histologia e Embriologia", "icone": "🔬" },
-    { "slug": "farmacologia", "nome": "Farmacologia", "icone": "💊" },
-    { "slug": "patologia", "nome": "Patologia", "icone": "🧫" },
-    { "slug": "microbiologia-imunologia", "nome": "Microbiologia e Imunologia", "icone": "🦠" },
-    { "slug": "semiologia", "nome": "Semiologia", "icone": "🩺" },
-    { "slug": "clinica-medica", "nome": "Clínica Médica", "icone": "🏥" },
-    { "slug": "cardiologia", "nome": "Cardiologia", "icone": "❤️" },
-    { "slug": "pneumologia", "nome": "Pneumologia", "icone": "🫁" },
-    { "slug": "neurologia", "nome": "Neurologia", "icone": "🧠" },
-    { "slug": "cirurgia", "nome": "Cirurgia", "icone": "🔪" },
-    { "slug": "pediatria", "nome": "Pediatria", "icone": "👶" },
-    { "slug": "ginecologia-obstetricia", "nome": "Ginecologia e Obstetrícia", "icone": "🤰" },
-    { "slug": "psiquiatria", "nome": "Psiquiatria", "icone": "🧩" },
-    { "slug": "emergencia", "nome": "Urgência e Emergência", "icone": "🚑" },
-    { "slug": "saude-coletiva", "nome": "Saúde Coletiva", "icone": "🌎" },
-    { "slug": "estudos-carreira", "nome": "Estudos e Carreira", "icone": "🎓" }
+    {
+      "nome": "Anatomia",
+      "slug": "anatomia",
+      "icone": "🦴"
+    },
+    {
+      "nome": "Fisiologia",
+      "slug": "fisiologia",
+      "icone": "🫀"
+    },
+    {
+      "nome": "Bioquímica",
+      "slug": "bioquimica",
+      "icone": "🧪"
+    },
+    {
+      "nome": "Histologia e Embriologia",
+      "slug": "histologia-embriologia",
+      "icone": "🔬"
+    },
+    {
+      "nome": "Farmacologia",
+      "slug": "farmacologia",
+      "icone": "💊"
+    },
+    {
+      "nome": "Patologia",
+      "slug": "patologia",
+      "icone": "🧫"
+    },
+    {
+      "nome": "Microbiologia e Imunologia",
+      "slug": "microbiologia-imunologia",
+      "icone": "🦠"
+    },
+    {
+      "nome": "Semiologia",
+      "slug": "semiologia",
+      "icone": "🩺"
+    },
+    {
+      "nome": "Clínica Médica",
+      "slug": "clinica-medica",
+      "icone": "🏥"
+    },
+    {
+      "nome": "Cardiologia",
+      "slug": "cardiologia",
+      "icone": "❤️"
+    },
+    {
+      "nome": "Pneumologia",
+      "slug": "pneumologia",
+      "icone": "🫁"
+    },
+    {
+      "nome": "Neurologia",
+      "slug": "neurologia",
+      "icone": "🧠"
+    },
+    {
+      "nome": "Cirurgia",
+      "slug": "cirurgia",
+      "icone": "🔪"
+    },
+    {
+      "nome": "Pediatria",
+      "slug": "pediatria",
+      "icone": "👶"
+    },
+    {
+      "nome": "Ginecologia e Obstetrícia",
+      "slug": "ginecologia-obstetricia",
+      "icone": "🤰"
+    },
+    {
+      "nome": "Psiquiatria",
+      "slug": "psiquiatria",
+      "icone": "🧩"
+    },
+    {
+      "nome": "Urgência e Emergência",
+      "slug": "emergencia",
+      "icone": "🚑"
+    },
+    {
+      "nome": "Saúde Coletiva",
+      "slug": "saude-coletiva",
+      "icone": "🌎"
+    },
+    {
+      "nome": "Estudos e Carreira",
+      "slug": "estudos-carreira",
+      "icone": "chapéu"
+    },
+    {
+      "nome": "SOI - SISTEMAS ORGÂNICOS INTEGRADOS",
+      "slug": "integrador",
+      "icone": "caveira"
+    }
   ]
 }
