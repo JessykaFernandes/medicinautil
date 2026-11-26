@@ -41,7 +41,7 @@ Site de resumos, artigos (blog) e PDFs de medicina, que também funciona como **
 Abra `src/_data/site.json` e troque o usuário do GitHub:
 
 ```json
-"github_repo": "SEU-USUARIO/medicinautil",
+"github_repo": "JessykaFernandes/medicinautil",
 ```
 
 Nome (**Medicina Útil**), endereço (`https://medicinautil.com`) e cores já estão configurados. O arquivo `src/CNAME` com o domínio também já existe.
@@ -53,12 +53,12 @@ O e-mail de contato está como `contato@medicinautil.com`. Para recebê-lo de gr
 A forma mais simples é o **GitHub Desktop** (gratuito: desktop.github.com):
 
 1. Instale, entre com sua conta e escolha **File → Add local repository**, selecionando a pasta do projeto. A pasta já é um repositório git com commit feito.
-2. Em **Repository → Repository settings → Remote**, cole `https://github.com/SEU-USUARIO/medicinautil.git` e clique em **Push origin**.
+2. Em **Repository → Repository settings → Remote**, cole `https://github.com/JessykaFernandes/medicinautil.git` e clique em **Push origin**.
 
 Pelo terminal, a alternativa é:
 
 ```bash
-git remote add origin https://github.com/SEU-USUARIO/medicinautil.git
+git remote add origin https://github.com/JessykaFernandes/medicinautil.git
 ```
 
 ```bash
@@ -79,11 +79,11 @@ git push -u origin main
 | A | `@` | `185.199.109.153` |
 | A | `@` | `185.199.110.153` |
 | A | `@` | `185.199.111.153` |
-| CNAME | `www` | `SEU-USUARIO.github.io` |
+| CNAME | `www` | `jessykafernandes.github.io` |
 
    > No Cloudflare, deixe esses registros como **"DNS only"** (nuvem cinza) até o GitHub emitir o certificado.
 4. Aguarde a propagação, que pode levar de minutos a algumas horas. Depois, marque **Enforce HTTPS** em *Settings → Pages*.
-5. Pronto: o site estará em **https://medicinautil.com**. Enquanto o domínio não propaga, ele já funciona em `https://SEU-USUARIO.github.io/medicinautil/`, porque o site se ajusta sozinho ao endereço.
+5. Pronto: o site estará em **https://medicinautil.com**. Enquanto o domínio não propaga, ele já funciona em `https://jessykafernandes.github.io/medicinautil/`, porque o site se ajusta sozinho ao endereço.
 
 ## Passo 6: Configurar o painel de publicação `/admin` (3 min)
 
