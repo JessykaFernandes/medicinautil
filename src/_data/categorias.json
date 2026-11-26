@@ -104,6 +104,11 @@
       "nome": "HAM - HABILIDADES E ATITUDES MÉDICAS",
       "slug": "ham",
       "icone": "🧑🏾‍💼"
+    },
+    {
+      "nome": "Dicas para as provas integradoras",
+      "slug": "dicas-provas-integradoras",
+      "icone": "💡"
     }
   ]
 }
